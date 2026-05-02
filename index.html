@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnapPro - Photography Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+    </head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1>SnapPro</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="night-mode-toggle" id="nightModeToggle" title="Toggle Night Mode">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button class="auth-btn" id="authBtn">Login</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Background -->
+    <section class="hero">
+        <div class="hero-background">
+            <img src="https://images.unsplash.com/photo-1485470733090-0aae1788d5af?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8d2FsbHBhcGVyJTIwNGt8ZW58MHx8MHx8fDA%3D" alt="Mountain Background">
+            <div class="hero-overlay"></div>
+        </div>
+        
+        <!-- Floating Bubbles in Hero -->
+        <div class="hero-bubbles">
+            <div class="hero-bubble bubble-1"></div>
+            <div class="hero-bubble bubble-2"></div>
+            <div class="hero-bubble bubble-3"></div>
+            <div class="hero-bubble bubble-4"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-glass">
+                <h2 class="hero-title">
+                    <span class="word">Capture</span>
+                    <span class="word">Every</span>
+                    <span class="word">Moment</span>
+                </h2>
+                <p class="hero-subtitle">Professional Photography for Everyone</p>
+                <button class="cta-btn" onclick="document.getElementById('gallery').scrollIntoView({behavior: 'smooth'})">
+                    Explore Gallery
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="section-container">
+            <h2 class="section-title">Our Gallery</h2>
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="nature">Nature</button>
+                <button class="filter-btn" data-filter="portrait">Portrait</button>
+                <button class="filter-btn" data-filter="urban">Urban</button>
+                <button class="filter-btn" data-filter="landscape">Landscape</button>
+                <button class="filter-btn" data-filter="architecture">Architecture</button>
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Gallery items will be populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Modal -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <img src="" alt="" id="modalImage">
+            <div class="modal-nav">
+                <button class="modal-prev">&lt;</button>
+                <button class="modal-next">&gt;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <div class="pricing-background">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=800&fit=crop&q=80" alt="Pricing Background">
+            <div class="pricing-overlay"></div>
+        </div>
+
+        <!-- Floating Bubbles in Pricing -->
+        <div class="pricing-bubbles">
+            <div class="pricing-bubble bubble-1"></div>
+            <div class="pricing-bubble bubble-2"></div>
+            <div class="pricing-bubble bubble-3"></div>
+        </div>
+
+        <div class="section-container">
+            <h2 class="section-title">Pricing Plans</h2>
+            
+            <!-- Billing Toggle -->
+            <div class="billing-toggle-container">
+                <span class="toggle-label">Monthly</span>
+                <div class="toggle-switch">
+                    <input type="checkbox" id="billingToggle" class="toggle-checkbox">
+                    <label for="billingToggle" class="toggle-label-switch"></label>
+                </div>
+                <span class="toggle-label">Annual <span class="savings-badge">Save 20%</span></span>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Basic</h3>
+                    <div class="price">
+                        <span class="currency">₹</span>
+                        <span class="amount" data-monthly="9999" data-annual="99999">9999</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <ul class="features-list">
+                        <li>50 High-Quality Images</li>
+                        <li>Monthly Photoshoot</li>
+                        <li>Basic Editing</li>
+                        <li>Cloud Storage 100GB</li>
+                        <li>Email Support</li>
+                    </ul>
+                    <button class="plan-btn" onclick="openPaymentModal('Basic', 9999)">Choose Plan</button>
+                </div>
+
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Professional</h3>
+                    <div class="price">
+                        <span class="currency">₹</span>
+                        <span class="amount" data-monthly="24999" data-annual="249999">24999</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <ul class="features-list">
+                        <li>200 High-Quality Images</li>
+                        <li>2 Monthly Photoshoots</li>
+                        <li>Professional Editing</li>
+                        <li>Cloud Storage 500GB</li>
+                        <li>Priority Support</li>
+                        <li>Album Creation</li>
+                    </ul>
+                    <button class="plan-btn" onclick="openPaymentModal('Professional', 24999)">Choose Plan</button>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">
+                        <span class="currency">₹</span>
+                        <span class="amount" data-monthly="49999" data-annual="499999">49999</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <ul class="features-list">
+                        <li>Unlimited Images</li>
+                        <li>Weekly Photoshoots</li>
+                        <li>Advanced Editing</li>
+                        <li>Unlimited Cloud Storage</li>
+                        <li>24/7 Dedicated Support</li>
+                        <li>Custom Albums & Books</li>
+                    </ul>
+                    <button class="plan-btn" onclick="openPaymentModal('Enterprise', 49999)">Choose Plan</button>
+                </div>
+            </div>
+
+            <!-- 30-Day Money Back Guarantee -->
+            <div class="guarantee-card">
+                <h4>30-Day Money Back Guarantee</h4>
+                <p>Not satisfied? We'll refund your money within 30 days. No questions asked!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews-section">
+        <div class="section-container">
+            <h2 class="section-title">Client Reviews</h2>
+            
+            <button class="add-review-btn" id="addReviewBtn">Add Your Review</button>
+
+            <div class="reviews-grid" id="reviewsGrid">
+                <!-- Reviews will be populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Review Modal -->
+    <div class="modal" id="addReviewModal">
+        <div class="modal-content review-form-container">
+            <button class="modal-close">&times;</button>
+            <h3>Share Your Experience</h3>
+            
+            <form id="reviewForm" class="review-form">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="reviewName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Role/Company</label>
+                    <input type="text" id="reviewRole">
+                </div>
+
+                <div class="form-group">
+                    <label>Rating</label>
+                    <div class="star-rating" id="starRating">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Photo (Optional)</label>
+                    <input type="file" id="reviewPhoto" accept="image/*">
+                    <small>Accepted formats: JPG, PNG, WebP (Max 5MB)</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Your Comments</label>
+                    <textarea id="reviewComment" rows="4" required></textarea>
+                </div>
+
+                <input type="hidden" id="reviewRating" value="5">
+                <input type="hidden" id="reviewPhotoData" value="">
+
+                <button type="submit" class="submit-btn">Submit Review</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="section-container">
+            <h2 class="section-title">About Us</h2>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>SnapPro is a leading photography platform connecting professional photographers with clients worldwide. With over 15 years of experience, we've captured thousands of precious moments.</p>
+                    
+                    <h4>Our Specializations</h4>
+                    <ul class="specializations">
+                        <li>Wedding Photography</li>
+                        <li>Portrait Sessions</li>
+                        <li>Commercial Photography</li>
+                        <li>Event Coverage</li>
+                        <li>Travel Photography</li>
+                        <li>Product Photography</li>
+                    </ul>
+                </div>
+
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <h3>500+</h3>
+                        <p>Projects Completed</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>1000+</h3>
+                        <p>Happy Clients</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>15+</h3>
+                        <p>Years Experience</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="section-container">
+            <h2 class="section-title">Contact Us</h2>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="info-card">
+                        <h4>Email</h4>
+                        <p><a href="mailto:hello@snappro.com">hello@snappro.com</a></p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Phone</h4>
+                        <p><a href="tel:+919876543210">+91 9876 543 210</a></p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Location</h4>
+                        <p>Mumbai, India</p>
+                    </div>
+                </div>
+
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+
+            <div class="social-links">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com" target="_blank" title="Facebook">f</a>
+                    <a href="https://instagram.com" target="_blank" title="Instagram">@</a>
+                    <a href="https://twitter.com" target="_blank" title="Twitter">𝕏</a>
+                    <a href="https://linkedin.com" target="_blank" title="LinkedIn">in</a>
+                    <a href="https://youtube.com" target="_blank" title="YouTube">▶</a>
+                    <a href="https://pinterest.com" target="_blank" title="Pinterest">P</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Auth Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-content auth-container">
+            <button class="modal-close">&times;</button>
+            
+            <div class="auth-tabs">
+                <button class="tab-btn active" data-tab="signin">Sign In</button>
+                <button class="tab-btn" data-tab="signup">Sign Up</button>
+            </div>
+
+            <div class="tab-content active" id="signin">
+                <form class="auth-form">
+                    <div class="form-group">
+                        <input type="email" placeholder="Email" value="demo@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Password" value="Demo@123" required>
+                    </div>
+                    <div class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <label for="rememberMe">Remember me</label>
+                    </div>
+                    <button type="submit" class="submit-btn">Sign In</button>
+                </form>
+
+                <div class="divider">OR</div>
+
+                <div class="social-login">
+                    <button type="button" class="social-btn google">
+                        <span class="logo">G</span> Google
+                    </button>
+                    <button type="button" class="social-btn facebook">
+                        <span class="logo">f</span> Facebook
+                    </button>
+                    <button type="button" class="social-btn twitter">
+                        <span class="logo">𝕏</span> Twitter
+                    </button>
+                </div>
+            </div>
+
+            <div class="tab-content" id="signup">
+                <form class="auth-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Password (Min 6 chars)" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Confirm Password" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Create Account</button>
+                </form>
+
+                <div class="divider">OR</div>
+
+                <div class="social-login">
+                    <button type="button" class="social-btn google">
+                        <span class="logo">G</span> Google
+                    </button>
+                    <button type="button" class="social-btn facebook">
+                        <span class="logo">f</span> Facebook
+                    </button>
+                    <button type="button" class="social-btn twitter">
+                        <span class="logo">𝕏</span> Twitter
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content payment-container">
+            <button class="modal-close">&times;</button>
+            <h3 id="paymentTitle">Payment Details</h3>
+
+            <div class="payment-summary">
+                <p id="paymentPlan"></p>
+                <p class="total">Total: <span id="paymentAmount">₹0</span> (incl. 18% GST)</p>
+            </div>
+
+            <div class="payment-methods">
+                <h4>Select Payment Method</h4>
+                
+                <div class="payment-options">
+                    <button class="payment-option" onclick="selectPaymentMethod('card')">
+                        <span class="payment-icon">💳</span>
+                        <span>Credit/Debit Card</span>
+                    </button>
+                    <button class="payment-option" onclick="selectPaymentMethod('upi')">
+                        <span class="payment-icon">📱</span>
+                        <span>Google Pay / UPI</span>
+                    </button>
+                    <button class="payment-option" onclick="selectPaymentMethod('wallet')">
+                        <span class="payment-icon">👛</span>
+                        <span>Digital Wallet</span>
+                    </button>
+                    <button class="payment-option" onclick="selectPaymentMethod('crypto')">
+                        <span class="payment-icon">₿</span>
+                        <span>Cryptocurrency</span>
+                    </button>
+                    <button class="payment-option" onclick="selectPaymentMethod('emi')">
+                        <span class="payment-icon">📊</span>
+                        <span>EMI Options</span>
+                    </button>
+                    <button class="payment-option" onclick="selectPaymentMethod('netbanking')">
+                        <span class="payment-icon">🏦</span>
+                        <span>Net Banking</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="paymentFormContainer"></div>
+
+            <button class="submit-btn" onclick="processPayment()">Complete Payment</button>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+    <script src="script.js"></script>
+</body>
+</html>
